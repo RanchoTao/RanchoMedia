@@ -1,0 +1,11 @@
+{
+  "policy": "external-only; no upstream source or credentials included",
+  "projects": {
+    "postiz": {"url":"https://github.com/gitroomhq/postiz-app.git","commit":"528f6ea37c8cf1156ad4a12de4e7aed853c019f2","license":"AGPL-3.0","destination":"RanchoMediaOS/upstream/postiz","automatic_execution":false},
+    "social-auto-upload": {"url":"https://github.com/dreammis/social-auto-upload.git","commit":"0012d2c355f88f683cc38dde2a2db209e14091bc","license":"MIT","destination":"RanchoMediaOS/upstream/social-auto-upload","automatic_execution":false},
+    "xiaohongshu-mcp": {"url":"https://github.com/xpzouying/xiaohongshu-mcp.git","commit":"a5c8f7799980ba1fdd501999843eb2d17e4c9a9f","version":"2.5.5","license":"Apache-2.0","automatic_execution":false},
+    "wechatpy": {"url":"https://github.com/wechatpy/wechatpy.git","commit":"a695b89891e0473113c946a3a44d948fcf217404","license":"MIT","automatic_execution":false},
+    "postiz-cli": {"package":"postiz","version":"2.0.26","url":"https://github.com/gitroomhq/postiz-agent","license":"AGPL-3.0","automatic_execution":false},
+    "zhihu-sync": {"url":"https://github.com/zhihu/ZhihuSync.git","commit":"a216c2677d00613c57dcdf11d884484379364ac3","license":"UNVERIFIED_FULL_TEXT","reuse":"REFERENCE_ONLY","automatic_execution":false}
+  }
+}

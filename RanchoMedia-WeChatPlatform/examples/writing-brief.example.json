@@ -1,0 +1,24 @@
+{
+  "topic_title": "合成模板：请替换为真实选题和来源",
+  "angle": "SYNTHETIC EXAMPLE ONLY。该文件只展示格式，不是实际内容生产资料。请替换来源URL、检索日期、原始摘录与写作角度。",
+  "sources": [
+    {
+      "ref": "S1",
+      "title": "SYNTHETIC TEST SOURCE - REPLACE BEFORE USE",
+      "url": "https://example.org/replace-with-primary-source",
+      "excerpt": "SYNTHETIC TEST ONLY: This placeholder is not evidence about any scientific result.",
+      "kind": "PRIMARY",
+      "retrieved_at": "2026-10-21T00:00:00+00:00",
+      "published_at": null
+    }
+  ],
+  "claims": [
+    {
+      "ref": "C1",
+      "source_ref": "S1",
+      "quote": "SYNTHETIC TEST ONLY",
+      "epistemic_status": "SOURCE_REPORT",
+      "note": "合成格式示例，不是事实依据。真实生产必须换成原始资料中逐字可定位的事实摘录。"
+    }
+  ]
+}

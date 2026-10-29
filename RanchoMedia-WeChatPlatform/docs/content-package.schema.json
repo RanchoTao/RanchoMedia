@@ -1,0 +1,377 @@
+{
+  "$defs": {
+    "Article": {
+      "additionalProperties": false,
+      "properties": {
+        "title_options": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5,
+          "minItems": 1,
+          "title": "Title Options",
+          "type": "array"
+        },
+        "body": {
+          "maxLength": 100000,
+          "minLength": 200,
+          "title": "Body",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 500,
+          "minLength": 10,
+          "title": "Summary",
+          "type": "string"
+        },
+        "outline": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "title": "Outline",
+          "type": "array"
+        },
+        "cover_suggestions": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Cover Suggestions",
+          "type": "array"
+        },
+        "image_manifest": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "maxItems": 20,
+          "title": "Image Manifest",
+          "type": "array"
+        },
+        "claims_used": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Claims Used",
+          "type": "array"
+        }
+      },
+      "required": [
+        "title_options",
+        "body",
+        "summary",
+        "outline",
+        "cover_suggestions",
+        "image_manifest",
+        "claims_used"
+      ],
+      "title": "Article",
+      "type": "object"
+    },
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "maxLength": 3,
+          "pattern": "^C[1-9][0-9]?$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "quote": {
+          "maxLength": 2000,
+          "minLength": 4,
+          "title": "Quote",
+          "type": "string"
+        },
+        "epistemic_status": {
+          "enum": [
+            "SOURCE_REPORT",
+            "OBSERVATION",
+            "PLAN",
+            "INFERENCE",
+            "AUTHOR_OPINION"
+          ],
+          "title": "Epistemic Status",
+          "type": "string"
+        },
+        "note": {
+          "default": "",
+          "maxLength": 1000,
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref",
+        "source_ref",
+        "quote",
+        "epistemic_status"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "Execution": {
+      "additionalProperties": false,
+      "properties": {
+        "executor": {
+          "enum": [
+            "codex-session",
+            "codex-exec",
+            "human"
+          ],
+          "title": "Executor",
+          "type": "string"
+        },
+        "generated_at": {
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 120,
+          "minLength": 3,
+          "title": "Model",
+          "type": "string"
+        },
+        "note": {
+          "maxLength": 2000,
+          "title": "Note",
+          "type": "string"
+        },
+        "style_sample_status": {
+          "enum": [
+            "IMPORTED",
+            "UNAVAILABLE_USER_CONSTRAINTS_ONLY"
+          ],
+          "title": "Style Sample Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "executor",
+        "generated_at",
+        "model",
+        "note",
+        "style_sample_status"
+      ],
+      "title": "Execution",
+      "type": "object"
+    },
+    "Review": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "COMPLETE",
+            "NEEDS_CONFIRMATION"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "findings": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "maxItems": 30,
+          "title": "Findings",
+          "type": "array"
+        },
+        "note": {
+          "maxLength": 3000,
+          "minLength": 10,
+          "title": "Note",
+          "type": "string"
+        },
+        "independence": {
+          "enum": [
+            "SAME_SESSION_SELF_CHECK",
+            "SEPARATE_REVIEW"
+          ],
+          "title": "Independence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "findings",
+        "note",
+        "independence"
+      ],
+      "title": "Review",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "maxLength": 3,
+          "pattern": "^S[1-9][0-9]?$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "maxLength": 2000,
+          "title": "Url",
+          "type": "string"
+        },
+        "excerpt": {
+          "maxLength": 20000,
+          "minLength": 20,
+          "title": "Excerpt",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "PRIMARY",
+            "SECONDARY",
+            "AUTHOR_MATERIAL",
+            "RSS"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "retrieved_at": {
+          "format": "date-time",
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        }
+      },
+      "required": [
+        "ref",
+        "title",
+        "url",
+        "excerpt",
+        "kind",
+        "retrieved_at"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "rancho-wechat.content/1.1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "package_id": {
+      "format": "uuid",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "execution": {
+      "$ref": "#/$defs/Execution"
+    },
+    "topic_title": {
+      "maxLength": 180,
+      "minLength": 4,
+      "title": "Topic Title",
+      "type": "string"
+    },
+    "topic_idea": {
+      "maxLength": 3000,
+      "title": "Topic Idea",
+      "type": "string"
+    },
+    "origin": {
+      "enum": [
+        "MANUAL",
+        "NEWS",
+        "EVERGREEN"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "news_published_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "News Published At"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "title": "Claims",
+      "type": "array"
+    },
+    "research_note": {
+      "maxLength": 30000,
+      "minLength": 40,
+      "title": "Research Note",
+      "type": "string"
+    },
+    "article": {
+      "$ref": "#/$defs/Article"
+    },
+    "fact_check": {
+      "$ref": "#/$defs/Review"
+    }
+  },
+  "required": [
+    "schema_version",
+    "package_id",
+    "execution",
+    "topic_title",
+    "topic_idea",
+    "origin",
+    "sources",
+    "claims",
+    "research_note",
+    "article",
+    "fact_check"
+  ],
+  "title": "ContentPackage",
+  "type": "object"
+}

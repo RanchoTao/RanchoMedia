@@ -1,0 +1,12 @@
+RanchoMedia
+Copyright 2026 RanchoTao and contributors.
+
+The repository owner's original RanchoMediaOS and RanchoMedia-WeChatPlatform
+source is released under the Apache License, Version 2.0 by explicit owner
+authorization on 2026-10-29.
+
+Third-party projects and dependencies are NOT relicensed by this notice.
+Postiz server/CLI are external AGPL services/tools, not vendored source.
+See THIRD_PARTY_NOTICES.md and integrations/upstreams.json for fixed references.
+Private articles, operator authorizations, credentials, runtime databases and
+production/model-call records are deliberately not part of this distribution.

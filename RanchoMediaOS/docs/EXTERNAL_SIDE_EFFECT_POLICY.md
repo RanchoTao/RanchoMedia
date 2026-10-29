@@ -1,0 +1,9 @@
+# External side effects — Phase 3
+
+Defaults: `EXTERNAL_SIDE_EFFECTS_ENABLED=false`, `POSTIZ_ENABLED=false`, `WEBSITE_REMOTE_ENABLED=false`. The API remains mock-only in development/test; staging/production API startup is rejected. `MediaService` requires a matching approved revision, target account, platform, schedule, payload hash, persisted qualification, and (for Postiz) both global and platform enablement before dispatch. Local Website `CREATE_COMMIT` is an offline side effect and does not require the external-network switch. `DRY_RUN` previews only. Website remote push and PR modes have no implementation.
+
+Website records PREPARED → IN_FLIGHT → CONFIRMED/UNKNOWN through the existing effect ledger and `publish_attempt`, `publish_result`, and `reconcile` audit actions. The local commit contains an idempotency key and approved payload SHA-256. On ambiguous commit response, the job is `OUTCOME_UNKNOWN`; `/publications/{job_id}/reconcile` checks Git history before any further action. The same key with a different approved payload is rejected.
+
+Postiz's wrapper can write only a draft to an explicitly local HTTP service. It records an intent in a durable SQLite journal before POST, retains unknown/accepted keys after restart, and refuses automatic resend. A GET `/public/v1/posts` result is only a candidate for human reconciliation because the pinned API has no reliable idempotency-key lookup. No Postiz draft receipt is represented as a public-platform publication. API credentials must be supplied at runtime; neither code, logs, reports nor the registry store a production key.
+
+Development API mutations require `LOCAL_API_TOKEN` in addition to the actor identifier. The test environment uses synthetic fixture identity and must never be exposed as a network service. Before any live adapter is connected, add a real owner authentication and account authorization mechanism, stage-specific deploy controls, and end-to-end live qualification.

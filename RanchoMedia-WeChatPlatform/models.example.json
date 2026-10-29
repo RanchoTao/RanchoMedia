@@ -1,0 +1,12 @@
+{
+  "enabled": false,
+  "allow_batch": false,
+  "timeout_seconds": 60,
+  "rate_limit_retries": 1,
+  "budget": {"daily_calls": 12, "daily_tokens": 200000, "daily_cost": "1", "currency": "CNY"},
+  "roles": {
+    "research": {"base_url": "https://api.deepseek.com/v1", "model": "SET_RESEARCH_MODEL_ID", "key_env": "WECHAT_MODEL_API_KEY", "input_per_million": "SET_VENDOR_RATE", "output_per_million": "SET_VENDOR_RATE", "max_output_tokens": 2500},
+    "write": {"base_url": "https://api.deepseek.com/v1", "model": "SET_WRITING_MODEL_ID", "key_env": "WECHAT_MODEL_API_KEY", "input_per_million": "SET_VENDOR_RATE", "output_per_million": "SET_VENDOR_RATE", "max_output_tokens": 6000},
+    "review": {"base_url": "https://api.deepseek.com/v1", "model": "SET_REVIEW_MODEL_ID", "key_env": "WECHAT_MODEL_API_KEY", "input_per_million": "SET_VENDOR_RATE", "output_per_million": "SET_VENDOR_RATE", "max_output_tokens": 2000}
+  }
+}

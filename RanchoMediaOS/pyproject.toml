@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rancho-media-os"
+version = "0.2.0"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = [
+  "fastapi>=0.115,<1", "pydantic>=2.10,<3", "pydantic-settings>=2.6,<3",
+  "sqlalchemy[asyncio]>=2.0,<2.1", "alembic>=1.14,<2", "aiosqlite>=0.20,<1",
+  "asyncpg>=0.30,<1", "uvicorn>=0.34,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pytest-asyncio>=1,<2", "httpx>=0.28,<1", "ruff>=0.11,<1", "mypy>=1.15,<2"]
+
+[tool.setuptools]
+packages = ["rancho_core", "rancho_db", "rancho_platform_sdk", "rancho_mock", "rancho_website", "rancho_postiz", "rancho_content", "rancho_analytics", "rancho_api", "rancho_workflows"]
+package-dir = {rancho_core="packages/core/src/rancho_core", rancho_db="packages/db/src/rancho_db", rancho_platform_sdk="packages/platform-sdk/src/rancho_platform_sdk", rancho_mock="adapters/mock/src/rancho_mock", rancho_website="adapters/website/src/rancho_website", rancho_postiz="adapters/postiz/src/rancho_postiz", rancho_content="packages/content/src/rancho_content", rancho_analytics="packages/analytics/src/rancho_analytics", rancho_api="apps/api/src/rancho_api", rancho_workflows="workflows/src/rancho_workflows"}
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+exclude = ["upstream", ".venv", "infra/audit_baseline.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["packages/core/src", "packages/db/src", "packages/platform-sdk/src", "packages/content/src", "packages/analytics/src", "adapters/mock/src", "adapters/website/src", "adapters/postiz/src", "apps/api/src", "workflows/src"]
