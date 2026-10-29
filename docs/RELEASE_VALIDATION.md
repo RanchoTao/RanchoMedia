@@ -29,7 +29,8 @@ The public desktop test fixture now creates its own synthetic variant and cover 
 - Gitleaks 8.30.1 was obtained from its official GitHub release and checked against the release SHA256. All source history scans use redacted reports.
 - OS history: zero findings. WeChat history: two generic-rule candidates manually reviewed as a redaction-test fake value and an editorial revision idempotency key. No actual credential was identified. Public fixture markers were normalized without turning off rules or using broad test-directory exclusions.
 - Original histories remain local and unchanged. The public Git history starts with a reviewed source snapshot; historical private operational/editorial reports and runtime/model-call records are not imported.
-- Prepared public files and the complete prepared Git history receive separate Gitleaks scans before push. A path/mode guard and explicit Git-tracked-file review accompany those scans; no one scanner is treated as proof of complete absence of secrets.
+- Prepared index: 214 files; Gitleaks staged scan passed with zero findings. An index-only archive received a separate filesystem scan: zero findings. The complete initial public history (one commit) was scanned separately: zero findings. No allowlist or detector exclusions were added. The final documentation commit is scanned again before push; CI also scans the complete fetched history.
+- Git path/mode guard: PASS, no source gitlinks or private/runtime paths. Markdown local-link review: nine withheld/upstream targets repaired; no personal Windows home paths remained in candidate text. A path/mode guard and explicit Git-tracked-file review accompany the scans; no one scanner is treated as proof of complete absence of secrets.
 
 Private raw scan logs and original production receipts remain outside the public repository. `SOURCE_PROVENANCE.json` records original object hashes and public file changes without embedding those records or data.
 
